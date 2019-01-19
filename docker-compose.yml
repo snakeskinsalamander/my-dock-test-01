@@ -1,0 +1,30 @@
+version: "3"
+
+services:    
+  phped:
+    image: php:7-fpm
+    volumes:
+      - ./www:/usr/var/www
+    networks:
+      - nginx_php_network
+    deploy:
+      replicas: 3
+
+  nginxed:
+    build: Dockerfile
+    image: nginx
+    volumes:
+      - ./www:/usr/var/www
+      - ./etc:/etc/nginx
+    networks:
+      - nginx_php_network
+    ports:
+      - 8080:80
+    depends_on:
+      - phped
+    deploy:
+      replicas: 2
+
+networks:
+  nginx_php_network:
+

@@ -1,0 +1,28 @@
+version: "3"
+
+services:  
+  phped:
+    image: php:7-fpm
+    volumes:
+      - ./www:/usr/var/www
+    networks:
+      - nginx_php_network
+    deploy:
+      replicas: 3
+
+  nginxed:
+    image: devianspade/nginx-mod:php-cfg
+    volumes:
+      - ./www:/usr/var/www
+    networks:
+      - nginx_php_network
+    ports:
+      - 8181:80
+    depends_on:
+      - phped
+    deploy:
+      replicas: 2
+
+networks:
+  nginx_php_network:
+

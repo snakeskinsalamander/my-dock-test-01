@@ -1,0 +1,17 @@
+FROM nginx
+
+# Get ping and vim utility and perform a cleanup
+RUN apt-get update \
+    && apt-get install iputils-ping -y \
+    && apt-get install vim -y \
+    && apt-get remove --purge -y gnupg1 \
+    && apt-get -y --purge autoremove \
+    && rm -rf /var/lib/apt/lists/*
+
+
+COPY ./etc /etc/nginx
+COPY ./www /usr/share/nginx
+
+WORKDIR /usr/share/nginx
+
+CMD ["nginx", "-g", "daemon off;"]
