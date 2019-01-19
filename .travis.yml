@@ -1,0 +1,6 @@
+sudo: required
+services:
+  - docker
+
+script:
+  - docker stack -c docker-compose2.yml devianspade/nginx-mod:php-cfg
