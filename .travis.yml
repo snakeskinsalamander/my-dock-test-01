@@ -3,4 +3,4 @@ services:
   - docker
 
 script:
-  - docker stack -c docker-compose2.yml devianspade/nginx-mod:php-cfg
+  - docker stack -c docker-compose2.yml nginx-mod-php-cfg
