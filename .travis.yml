@@ -7,3 +7,17 @@ before_install:
 
 script:
   - docker stack deploy -c docker-compose2.yml nginx-mod-php-cfg
+
+deploy:
+  provider: "elasticbeanstalk"
+  region:  "us-east-2"
+  app: "mynginxphp"
+  env: "Mynginxphp-env"
+  bucket_name: "elasticbeanstalk-us-east-2-417856445387"
+  bucket_path: "mynginxphp"
+  on:
+    branch: "master"
+  access_key_id: "$NOT_MY_ACCESS_KEY"
+  secret_access_key:
+    secure: "$NOT_MY_SECRET"
+
