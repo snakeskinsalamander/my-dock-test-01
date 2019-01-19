@@ -2,5 +2,8 @@ sudo: required
 services:
   - docker
 
+before_install:
+  - docker swarm init
+
 script:
   - docker stack deploy -c docker-compose2.yml nginx-mod-php-cfg
